@@ -50,6 +50,7 @@ public class EquipmentManager : MonoBehaviour {
 		// Find out what slot the item fits in
 		int slotIndex = (int)newItem.equipSlot;
 
+		// Unequip any items in that slot
         Equipment oldItem = Unequip(slotIndex);
 
 		// An item has been equipped so we trigger the callback

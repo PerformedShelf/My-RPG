@@ -7,47 +7,47 @@ public class PlayerAnimator : CharacterAnimator {
     public WeaponAnimations[] weaponAnimations;
     Dictionary<Equipment, AnimationClip[]> weaponAnimationsDict;
 
-    protected override void Start()
-    {
-        base.Start();
+    protected override void Start () {
+        base.Start ();
         EquipmentManager.instance.onEquipmentChanged += OnEquipmentChanged;
 
-        weaponAnimationsDict = new Dictionary<Equipment, AnimationClip[]>();
-        foreach (WeaponAnimations a in weaponAnimations)
-        {
-            weaponAnimationsDict.Add(a.weapon, a.clips);
+        // Initialise weapon animations dictionary
+        weaponAnimationsDict = new Dictionary<Equipment, AnimationClip[]> ();
+        foreach (WeaponAnimations a in weaponAnimations) {
+            weaponAnimationsDict.Add (a.weapon, a.clips);
         }
     }
 
-    void OnEquipmentChanged(Equipment newItem, Equipment oldItem)
-    {
-        if (newItem != null && newItem.equipSlot == EquipmentSlot.Weapon)
-        {
-            animator.SetLayerWeight(1, 1);
-            if (weaponAnimationsDict.ContainsKey(newItem))
-            {
+    void OnEquipmentChanged (Equipment newItem, Equipment oldItem) {
+        // If we are equipping a new weapon
+        if (newItem != null && newItem.equipSlot == EquipmentSlot.Weapon) {
+            animator.SetLayerWeight (1, 1);
+
+            // Get new weapon animations
+            if (weaponAnimationsDict.ContainsKey (newItem)) {
                 currentAttackAnimSet = weaponAnimationsDict[newItem];
             }
         }
-        else if (newItem == null && oldItem != null && oldItem.equipSlot == EquipmentSlot.Weapon)
-        {
-            animator.SetLayerWeight(1, 0);
+
+        // If we are unequipping a weapon
+        else if (newItem == null && oldItem != null && oldItem.equipSlot == EquipmentSlot.Weapon) {
+            animator.SetLayerWeight (1, 0);
             currentAttackAnimSet = defaultAttackAnimSet;
         }
 
-        if (newItem != null && newItem.equipSlot == EquipmentSlot.Shield)
-		{
-			animator.SetLayerWeight(2, 1);
-		}
-        else if (newItem == null && oldItem != null && oldItem.equipSlot == EquipmentSlot.Shield)
-		{
-			animator.SetLayerWeight(2, 0);
-		}
+        // If we are equipping a new shield
+        if (newItem != null && newItem.equipSlot == EquipmentSlot.Shield) {
+            animator.SetLayerWeight (2, 1);
+        }
+
+        // If we are unequipping a shield
+        else if (newItem == null && oldItem != null && oldItem.equipSlot == EquipmentSlot.Shield) {
+            animator.SetLayerWeight (2, 0);
+        }
     }
 
     [System.Serializable]
-    public struct WeaponAnimations
-    {
+    public struct WeaponAnimations {
         public Equipment weapon;
         public AnimationClip[] clips;
     }

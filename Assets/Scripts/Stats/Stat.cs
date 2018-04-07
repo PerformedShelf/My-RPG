@@ -8,31 +8,28 @@ using UnityEngine;
 public class Stat {
 
 	[SerializeField]
-	private int baseValue;	// Starting value
+	private int baseValue; // Starting value
 
 	// List of modifiers that change the baseValue
-	private List<int> modifiers = new List<int>();
+	private List<int> modifiers = new List<int> ();
 
 	// Get the final value after applying modifiers
-	public int GetValue ()
-	{
+	public int GetValue () {
 		int finalValue = baseValue;
-		modifiers.ForEach(x => finalValue += x);
+		modifiers.ForEach (x => finalValue += x);
 		return finalValue;
 	}
 
 	// Add new modifier
-	public void AddModifier (int modifier)
-	{
+	public void AddModifier (int modifier) {
 		if (modifier != 0)
-			modifiers.Add(modifier);
+			modifiers.Add (modifier);
 	}
 
 	// Remove a modifier
-	public void RemoveModifier (int modifier)
-	{
+	public void RemoveModifier (int modifier) {
 		if (modifier != 0)
-			modifiers.Remove(modifier);
+			modifiers.Remove (modifier);
 	}
 
 }

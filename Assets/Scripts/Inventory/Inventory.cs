@@ -8,11 +8,9 @@ public class Inventory : MonoBehaviour {
 
 	public static Inventory instance;
 
-	void Awake ()
-	{
-		if (instance != null)
-		{
-			Debug.LogWarning("More than one instance of Inventory found!");
+	void Awake () {
+		if (instance != null) {
+			Debug.LogWarning ("More than one instance of Inventory found!");
 			return;
 		}
 
@@ -23,46 +21,44 @@ public class Inventory : MonoBehaviour {
 
 	// Callback which is triggered when
 	// an item gets added/removed.
-	public delegate void OnItemChanged();
+	public delegate void OnItemChanged ();
 	public OnItemChanged onItemChangedCallback;
 
-	public int space = 20;	// Amount of slots in inventory
+	public int space = 20; // Amount of slots in inventory
 
 	// Current list of items in inventory
-	public List<Item> items = new List<Item>();
+	public List<Item> items = new List<Item> ();
 
 	// Add a new item. If there is enough room we
 	// return true. Else we return false.
-	public bool Add (Item item)
-	{
+	public bool Add (Item item) {
+		
 		// Don't do anything if it's a default item
-		if (!item.isDefaultItem)
-		{
+		if (!item.isDefaultItem) {
+			
 			// Check if out of space
-			if (items.Count >= space)
-			{
-				Debug.Log("Not enough room.");
+			if (items.Count >= space) {
+				Debug.Log ("Not enough room.");
 				return false;
 			}
 
-			items.Add(item);	// Add item to list
+			items.Add (item); // Add item to list
 
 			// Trigger callback
 			if (onItemChangedCallback != null)
-				onItemChangedCallback.Invoke();
+				onItemChangedCallback.Invoke ();
 		}
 
 		return true;
 	}
 
 	// Remove an item
-	public void Remove (Item item)
-	{
-		items.Remove(item);		// Remove item from list
+	public void Remove (Item item) {
+		items.Remove (item); // Remove item from list
 
 		// Trigger callback
 		if (onItemChangedCallback != null)
-			onItemChangedCallback.Invoke();
+			onItemChangedCallback.Invoke ();
 	}
 
 }
