@@ -102,7 +102,7 @@ public class CharacterStats : MonoBehaviour {
 			diceTally += diceResult;
 			strengthDamageDice--;
 		}
-		return diceTally += strengthDamageModifier; // Returns result of tally after applying modifiers
+		return diceTally += strengthDamageModifier += damage.GetValue(); // Returns result of tally after applying modifiers
 	}
 	
 	// Damage the character
