@@ -15,28 +15,39 @@ public class CharacterStats : MonoBehaviour {
 	public int strengthDamageModifier {get; private set;}
 	public Stat dexterity;
 	public Stat intelligence;
-	public int maxHealth = 100;
-	public int currentHealth { get; private set; }
+	public Stat constitution;
 
 	[Space]
 
 	//Characteristics
 	[Header("Characteristics")]
 	public Stat damage;
-	public Stat lift;
 	public Stat hitPoints;
-	public Stat will;
-	public Stat perception;
-	public Stat fatigue;
-	public Stat basicSpeed;
-	public Stat basicMove;
+	public int maxHit {get; private set;}
+	public int currentHit { get; private set; }
+	public int will, perception, fatigue, basicMove;
+	public float lift, basicSpeed;
+
 
 	// Set current health to max health
 	// when starting the game.
 	void Awake () {
-		currentHealth = maxHealth;
 		strengthDamageDice = StrengthDamageDice(strength); // Set the number of damage dice based on strength stat
 		strengthDamageModifier = StrengthDamageModifier(strength);
+
+		lift = (strength.GetValue() * strength.GetValue()) / 5f;
+
+		maxHit = strength.GetValue();
+		currentHit = maxHit;
+
+		will = intelligence.GetValue();
+		perception = intelligence.GetValue();
+
+		fatigue = constitution.GetValue();
+
+		basicSpeed = (constitution.GetValue() + dexterity.GetValue()) / 4f;
+		basicMove = (int)Mathf.Floor(basicSpeed);
+
 	}
 
 	// Get strength stat and set number of 
@@ -112,11 +123,11 @@ public class CharacterStats : MonoBehaviour {
 		diceTally = Mathf.Clamp (diceTally, 0, int.MaxValue);
 
 		// Damage the character
-		currentHealth -= diceTally;
+		currentHit -= diceTally;
 		Debug.Log (transform.name + " takes " + diceTally + " damage.");
 
 		// If health reaches zero
-		if (currentHealth <= 0) {
+		if (currentHit <= 0) {
 			Die ();
 		}
 	}
