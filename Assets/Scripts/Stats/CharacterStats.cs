@@ -12,7 +12,7 @@ public class CharacterStats : MonoBehaviour {
 	[Header("Attributes")]
 	public Stat strength;
 	public int strengthDamageDice {get; private set;}
-	public int strengthDamageModifier = 0;
+	public int strengthDamageModifier {get; private set;}
 	public Stat dexterity;
 	public Stat intelligence;
 	public int maxHealth = 100;
@@ -36,27 +36,28 @@ public class CharacterStats : MonoBehaviour {
 	void Awake () {
 		currentHealth = maxHealth;
 		strengthDamageDice = StrengthDamageDice(strength); // Set the number of damage dice based on strength stat
+		strengthDamageModifier = StrengthDamageModifier(strength);
 	}
 
 	// Get strength stat and set number of 
 	// damage dice if between a certain range
 	public int StrengthDamageDice(Stat strength){
-		int str = strength.GetValue();
-		if (str >=1 && str <= 11){
+		int i = strength.GetValue();
+		if (i >=1 && i <= 11){
 			return strengthDamageDice = 1;
-		} else if (str >= 12 && str <= 17){
+		} else if (i >= 12 && i <= 17){
 			return strengthDamageDice = 2;
-		} else if (str >= 18 && str <= 23){
+		} else if (i >= 18 && i <= 23){
 			return strengthDamageDice = 3;
-		} else if (str >= 24 && str <= 29){
+		} else if (i >= 24 && i <= 29){
 			return strengthDamageDice = 4;
-		} else if (str >= 30 && str <= 35){
+		} else if (i >= 30 && i <= 35){
 			return strengthDamageDice = 5;
-		} else if (str>= 36 && str <= 41){
+		} else if (i>= 36 && i <= 41){
 			return strengthDamageDice = 6;
-		} else if (str >= 42 && str <= 47){
+		} else if (i >= 42 && i <= 47){
 			return strengthDamageDice = 7;
-		} else if (str <= 0){
+		} else if (i <= 0){
 			Debug.LogWarning("StrengthDamageDice returned as 0");
 			return strengthDamageDice = 0;
 		} else {
@@ -64,6 +65,34 @@ public class CharacterStats : MonoBehaviour {
 			return strengthDamageDice = 0;
 		}
 	}
+
+		public int StrengthDamageModifier(Stat strength){
+			int i = strength.GetValue();
+			if (i >= 1 && i <= 3){
+				return strengthDamageModifier = -5;
+			}	else if ( i == 4){
+				return strengthDamageModifier = -4;
+			}	else if ( i == 5 || i == 12 || i == 18 || i == 24 || i == 30 || i == 36 || (i >= 50 && i < 55) || (i >= 80 && i < 85 )){
+				return strengthDamageModifier = -3;
+			}	else if ( i == 6 || i == 13 || i == 19 || i == 25 || i == 31 || i == 37 || (i >= 55 && i < 60) || (i >= 85 && i < 90 )){
+				return strengthDamageModifier = -2;
+			}	else if ( i == 7 || i == 14 || i == 20 || i == 26 || i == 32 || i == 38 || (i >= 60 && i < 65) || (i >= 90 && i < 95 )){
+				return strengthDamageModifier = -1;
+			}	else if ( i == 8 || i == 15 || i == 21 || i == 27 || i == 33 || i == 39 || (i >= 65 && i < 70) || (i >= 95 && i < 100 )){
+				return strengthDamageModifier = 0;
+			}	else if ( i == 9 || i == 16 || i == 22 || i == 28 || i == 34 || (i >= 40 && i < 45) || (i >= 70 && i < 75) || i == 100 ){
+				return strengthDamageModifier = 1;
+			}	else if ( i == 10 || i == 17 || i == 23 || i == 29 || i == 35 || (i >= 45 && i < 50) || ( i >= 75 && i < 80 )){
+				return strengthDamageModifier = 2;
+			}	else if (i == 11){
+				return strengthDamageModifier = 3;
+			}	else if ( i <= 0 ){
+				return strengthDamageModifier -999;
+			}	else {
+				Debug.LogWarning("strengthDamageModifier returned  above specified range");
+				return strengthDamageModifier -999;
+			}
+		}
 
 	// Rolls dice and applies modifiers
 	public int DiceRoller(int strengthDamageDice, int strengthDamageModifier){
