@@ -52,7 +52,7 @@ public class CharacterCombat : MonoBehaviour {
 	{
 		yield return new WaitForSeconds(delay);
 
-		stats.TakeDamage(myStats.damage.GetValue());
+		stats.TakeDamage(myStats.DiceRoller(myStats.strengthDamageDice, myStats.strengthDamageModifier));
         if (stats.currentHealth <= 0)
         {
             InCombat = false;
