@@ -18,21 +18,27 @@ public class PlayerAnimator : CharacterAnimator {
         }
     }
 
-    void OnEquipmentChanged (Equipment newItem, Equipment oldItem) {
+    protected virtual void OnEquipmentChanged (Equipment newItem, Equipment oldItem) {
         // If we are equipping a new weapon
         if (newItem != null && newItem.equipSlot == EquipmentSlot.Weapon) {
             animator.SetLayerWeight (1, 1);
-
+            
             // Get new weapon animations
             if (weaponAnimationsDict.ContainsKey (newItem)) {
                 currentAttackAnimSet = weaponAnimationsDict[newItem];
             }
+            
+            // Set transition to equipped item locomotion
+            animator.SetBool("equipLocomotion", true);
         }
 
         // If we are unequipping a weapon
         else if (newItem == null && oldItem != null && oldItem.equipSlot == EquipmentSlot.Weapon) {
             animator.SetLayerWeight (1, 0);
             currentAttackAnimSet = defaultAttackAnimSet;
+            
+            // Transition to unequipped locomotion
+            animator.SetBool("equipLocomotion", false);
         }
 
         // If we are equipping a new shield

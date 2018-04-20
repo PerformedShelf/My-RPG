@@ -105,6 +105,10 @@
      <Compile Include="Assets\Scripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\EquipmentManager.cs" />
      <Compile Include="Assets\Scripts\Helper\MeshFromSkinnedMesh.cs" />
+     <Compile Include="Assets\Scripts\Helper\SkinnedMeshFromMesh.cs" />
+     <Compile Include="Assets\Scripts\Helper\UnityFBXExporter\FBXExporter.cs" />
+     <Compile Include="Assets\Scripts\Helper\UnityFBXExporter\FBXUnityMaterialGetter.cs" />
+     <Compile Include="Assets\Scripts\Helper\UnityFBXExporter\FBXUnityMeshGetter.cs" />
      <Compile Include="Assets\Scripts\Interactable.cs" />
      <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
      <Compile Include="Assets\Scripts\Inventory\InventorySlot.cs" />

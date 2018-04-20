@@ -11,7 +11,7 @@ public class MeshFromSkinnedMesh : MonoBehaviour {
             SkinnedMeshRenderer skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>();
             MeshFilter filter = gameObject.AddComponent<MeshFilter>();
             MeshRenderer renderer = gameObject.AddComponent<MeshRenderer>();
-            filter.mesh = skinnedMeshRenderer.sharedMesh;
+            filter.sharedMesh = skinnedMeshRenderer.sharedMesh;
             renderer.sharedMaterials = skinnedMeshRenderer.sharedMaterials;
             DestroyImmediate(skinnedMeshRenderer);
             DestroyImmediate(this);

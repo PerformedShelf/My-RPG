@@ -86,6 +86,8 @@
      <Compile Include="Assets\Environment\PostProcessing\Editor\Utils\FxStyles.cs" />
      <Compile Include="Assets\Environment\PostProcessing\Editor\Utils\ReflectionUtils.cs" />
      <Compile Include="Assets\Scripts\Helper\AutoSave\Editor\AutoSaveExtension.cs" />
+     <Compile Include="Assets\Scripts\Helper\UnityFBXExporter\Editor\ExporterMenu.cs" />
+     <Compile Include="Assets\Scripts\Helper\UnityFBXExporter\Editor\ProceduralTest.cs" />
  <Reference Include="Facebook.Unity.Settings">
  <HintPath>C:/Users/Matt/gitProjects/My-RPG/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>
  </Reference>
